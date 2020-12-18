@@ -1,31 +1,34 @@
 ---
 layout: post
 title:  "Apache Bigtop の概要と最新動向"
-date:   2020-12-19 00:00:00 +0900
 category: blog
 tags:   apache bigtop oss
 ---
+本記事は,
+[Distributed computing (Apache Spark, Hadoop, Kafka, ...) Advent Calendar 2020](https://qiita.com/advent-calendar/2020/distributed-computing)
+18日目の記事です。
+
 この記事では, [Apache Bigtop](https://bigtop.apache.org) (以下 Bigtop) という OSS プロジェクトの概要と、
 2020年12月時点の最新動向について紹介します。
 
-# Bigtop の概要と歴史
+## Bigtop の概要と歴史
 
 Bigtop は, [Apache Hadoop](https://hadoop.apache.org/) エコシステムの環境構築やテストを容易にするための
 [Apache Software Foundation](https://apache.org/) 傘下のプロジェクトで、以下のような機能を提供します。
 
-1. ユーザが容易にインストールできるよう, Hadoop や [Spark](https://spark.apache.org/) といったビッグデータ関連の
-   OSS をビルドした, [deb](https://wiki.debian.org/deb) や [rpm](https://rpm.org/) 形式のバイナリパッケージ。
-2. パッケージのインストールとその後の各種設定 (以下、併せてデプロイと呼びます) を自動化するための
+1. Hadoop や [Spark](https://spark.apache.org/) などのビッグデータ関連 OSS を,
+   [deb](https://wiki.debian.org/deb) や [rpm](https://rpm.org/) 形式にビルドしたバイナリパッケージ。
+2. パッケージのインストールとその後の環境設定 (以下、併せてデプロイと呼びます) を自動化するための
    [Puppet](https://puppet.com/open-source/#osp) マニフェスト。
 3. デプロイ後にクラスタの動作を確認するための、スモークテストやインテグレーションテスト。
-4. テストや PoC 用途などに、仮想マシンやコンテナを用いた擬似的なクラスタをローカル環境に構築するための provisioner と呼ばれる機能。
+4. テストや PoC 用途などに、仮想マシンやコンテナを用いた擬似クラスタをローカル環境に構築する provisioner と呼ばれる機能。
 
 Bigtop は、2011年に [Apache incubator](https://incubator.apache.org/) 傘下のプロジェクトとして活動を開始し、
 2012 年に TLP (トップレベルプロジェクト) に昇格した歴史あるプロジェクトです。
-開始から10年近くに渡って、だいたい半年から1年半くらいの間隔で、継続的に最新版をリリースしてきました。
+開始から10年近くに渡り、だいたい半年から1年半くらいの間隔で、継続的に最新版をリリースしてきました。
 記事執筆時点での最新バージョンは、2020/12/15 にリリースされた 1.5.0 です。
 
-私は [1.5.0 のリリースマネージャを努めた](https://lists.apache.org/thread.html/r226f6cfe4da0671afda32490adcee42da1c9bcc34eb4da41d604c6cf%40%3Cdev.bigtop.apache.org%3E)
+私は [1.5.0 のリリースマネージャを務めた](https://lists.apache.org/thread.html/r226f6cfe4da0671afda32490adcee42da1c9bcc34eb4da41d604c6cf%40%3Cdev.bigtop.apache.org%3E)
 のですが, Bigtop については日本語の情報が少なく、国内での知名度は低いかと思います。
 また、英語の [公式サイト](https://bigtop.apache.org) や
 [Wiki](https://cwiki.apache.org/confluence/display/BIGTOP/Index) のドキュメントも、
@@ -40,15 +43,14 @@ Bigtop は、2011年に [Apache incubator](https://incubator.apache.org/) 傘下
 また、公式ドキュメント等で言及されているわけではありませんが,
 [Microsoft Azure](https://azure.microsoft.com/) の [HDInsight](https://azure.microsoft.com/en-us/services/hdinsight/) や
 [Google Cloud](https://cloud.google.com/) の [Dataproc](https://cloud.google.com/dataproc) も,
-(少なくとも 2020/12 時点では) クラスタの構築に Bigtop の機能を利用しているようです[^1].
+(少なくとも記事執筆時点では) クラスタの構築に Bigtop の機能を利用しているようです[^1].
 ですので、読者の方が意識しないところで、既に Bigtop を利用しているかもしれません。
 
-[^1]: 記事執筆時点の最新バージョンである HDInsight 4.0 および Dataproc 1.5 で確認。
+[^1]: 2020/12 時点の最新バージョンである HDInsight 4.0 および Dataproc 1.5 で確認。
       クラスタに SSH でログインして `apt-cache show hadoop*` を実行すると、
       Maintainer に `Bigtop <dev@bigtop.apache.org>` と表示される。
 
-
-# Bigtop 1.5.0 の紹介
+## Bigtop 1.5.0 の紹介
 
 Bigtop 1.5.0 を使うことで、以下のようなソフトウェア (Bigtop ではコンポーネントと呼びます) を容易に導入することができます。
 
