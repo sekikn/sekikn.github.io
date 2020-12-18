@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Bigtop のスモークテストを使って Hadoop/Spark クラスタの動作確認を行う"
-date:   2020-12-21 00:00:00 +0900
 category: blog
 tags:   apache bigtop oss
 ---

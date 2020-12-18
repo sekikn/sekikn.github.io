@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Bigtop の Puppet マニフェストを使って Hadoop/Spark クラスタの構築を自動化する"
-date:   2020-12-20 00:00:00 +0900
 category: blog
 tags:   apache bigtop oss
 ---

@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Bigtop の provisioner を使って仮想マシンやコンテナ上に Hadoop/Spark クラスタを構築する"
-date:   2020-12-21 00:00:00 +0900
 category: blog
 tags:   apache bigtop oss
 ---
