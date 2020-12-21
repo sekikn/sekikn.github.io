@@ -42,7 +42,6 @@ apt や yum, dnf といったパッケージマネージャ経由で Hadoop を�
 $ cd /mnt/share
 $ curl -O https://downloads.apache.org/bigtop/bigtop-1.5.0/bigtop-1.5.0-project.tar.gz
 $ tar xf bigtop-1.5.0-project.tar.gz
-$ cd bigtop-1.5.0
 ```
 
 次に、全ノードに Puppet をインストールします。
@@ -51,6 +50,7 @@ $ cd bigtop-1.5.0
 
 ※全てのノードで実行
 ```
+$ cd /mnt/share/bigtop-1.5.0
 $ sudo bigtop_toolchain/bin/puppetize.sh
 ```
 
